@@ -78,8 +78,17 @@ function SongFeature(props) {
 
 
 
-  const handleSongFormSubmit =(value) => {
-    console.log('Form submit: ', value);
+  const handleSongFormSubmit =(values) => {
+    console.log('Form submit: ', values);
+    const newSong = {
+      id: songList.length + 1,
+      title: values.title,
+      status: 'new',
+    };
+
+    const newSongList = [...songList, newSong];
+
+    setSongList(newSongList);
   };
 
 
@@ -87,8 +96,11 @@ function SongFeature(props) {
   return (
     <div>
 
+      
+
       <h3>what song ? </h3>
       <SongForm onSubmit={handleSongFormSubmit}/>
+
       <h3>Song List</h3>
       <SongList songList={renderSongList} onSongClick={handleSongClick} />
 

@@ -1,16 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import { BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
 import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
+
 ReactDOM.render(
   <React.StrictMode>
 
+    {/* <Provider store={store}>
+      
+
+    </Provider> */}
+
     <BrowserRouter>
-      <App /> 
-    </BrowserRouter>
+        <App /> 
+      </BrowserRouter>
+ 
+
+    
     
   </React.StrictMode>,
 
