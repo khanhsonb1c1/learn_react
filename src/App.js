@@ -4,6 +4,17 @@ import "./App.css";
 import NotFound from "./components/not-found/not-found";
 import SongFeature from "./features/song/pages/list-page/list-page";
 import productApi from "./api/productAPI";
+import CounterFeature from "./features/counter";
+import styled from "styled-components";
+
+import headerzzz from "components/header/header";
+import Header from "components/header/header";
+
+
+
+
+
+
 
 function App() {
 
@@ -20,15 +31,12 @@ function App() {
 
   return (
     <div className="App">
-      home page
-      <p>
-        <NavLink to="/song"> Song List </NavLink>
-      </p>
 
-
+     <Header/>
+      
       <Switch>
         <Route path="/song" component={SongFeature} exact />
-        <Route path="/" component={SongFeature} />
+        <Route path="/" component={CounterFeature} />
 
         <Route component={NotFound} />
       </Switch>

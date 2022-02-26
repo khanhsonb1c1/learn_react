@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import InputField from "../../../../components/form-control/input-field/input_field";
+//import InputField from "../../../../components/form-control/input-field/input_field";
 import { useForm } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import InputField from "components/form-control/input-field/input_field";
 
 SongForm.propTypes = {
   onSubmit: PropTypes.func,

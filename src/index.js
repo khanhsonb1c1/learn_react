@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+
+import store from './app/store';
 
 import { BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
 import App from './App';
@@ -15,9 +18,14 @@ ReactDOM.render(
 
     </Provider> */}
 
-    <BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
         <App /> 
       </BrowserRouter>
+
+    </Provider>
+
+    
  
 
     
