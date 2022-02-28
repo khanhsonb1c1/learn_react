@@ -33,6 +33,9 @@ function InputField(props) {
         control ={form.control}
         as={TextField}
 
+        variant = "outlined"
+        margin="normal"
+
         fullWidth
         label ={label}
         disabled = {disabled}
@@ -41,17 +44,7 @@ function InputField(props) {
         helperText ={errors[name]?.message}
         
         />
-        
-
-        
-
-        // <div>
-        //     <TextField  />
-
-
-
-        // </div>
-        
+ 
     );
 }
 

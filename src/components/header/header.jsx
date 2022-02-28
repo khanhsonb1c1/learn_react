@@ -18,6 +18,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import CodeIcon from "@material-ui/icons/Code";
 import { Link, NavLink } from "react-router-dom";
+import Register from "features/auth/components/register/register";
 
 //style cho MUI 
 
@@ -85,18 +86,10 @@ export default function Header() {
       open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         
         <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here. We will send updates
-            occasionally.
-          </DialogContentText>
-          {/* <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-          /> */}
+
+          <Register/>
+          
+          
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
