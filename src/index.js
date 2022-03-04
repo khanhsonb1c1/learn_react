@@ -13,10 +13,6 @@ import reportWebVitals from './reportWebVitals';
 ReactDOM.render(
   <React.StrictMode>
 
-    {/* <Provider store={store}>
-      
-
-    </Provider> */}
 
     <Provider store={store}>
       <BrowserRouter>

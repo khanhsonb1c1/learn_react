@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import InputField from "components/form-control/input-field/input_field";
-import { Avatar, Button, Typography } from "@material-ui/core";
+import { Avatar, Button, LinearProgress, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
 import Container from "@material-ui/core/Container";
@@ -15,6 +15,7 @@ import PasswordField from "components/form-control/password-field/password_field
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: "40px",
+    position: 'relative'
   },
 
   avatar: {
@@ -32,6 +33,16 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: "30px 0px 20px 0px",
   },
+
+  progress: {
+
+    position: 'absolute',
+    top: '10px',
+    left: 0,
+    right: 0,
+
+  },
+
 }));
 
 RegisterForm.propTypes = {
@@ -77,6 +88,7 @@ function RegisterForm(props) {
     .oneOf([yup.ref('password')], 'Password does not match.'), //.ref : yeu cau giong field password
 
 
+   
   });
 
   const form = useForm({
@@ -90,16 +102,25 @@ function RegisterForm(props) {
     resolver: yupResolver(schema),
   });
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     const { onSubmit } = props;
     if (onSubmit) {
-      onSubmit(values);
+      await  onSubmit(values);
     }
     form.reset();
   };
 
+
+  const{isSubmitting} = form.formState;
+
+
   return (
     <div className={classes.root}>
+
+      
+          {/* show loading */}
+      {isSubmitting && <LinearProgress className={classes.progress}/>} 
+
       <Avatar className={classes.avatar}></Avatar>
 
       <Typography className={classes.title} component="h3" variant="h5">
@@ -116,7 +137,9 @@ function RegisterForm(props) {
           form={form}
         />
 
-        <Button
+        <Button disabled = {isSubmitting}
+        // disabled button submit when submit
+
           type="submit"
           className={classes.submit}
           variant="contained"
