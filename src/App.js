@@ -9,6 +9,8 @@ import styled from "styled-components";
 
 import headerzzz from "components/header/header";
 import Header from "components/header/header";
+import { useSnackbar } from "notistack";
+import { Button } from "@material-ui/core";
 
 
 
@@ -17,6 +19,20 @@ import Header from "components/header/header";
 
 
 function App() {
+
+
+  const{enqueueSnackbar} = useSnackbar();
+
+
+  const showNoti = () =>{
+    
+    enqueueSnackbar('Register success', {variant:'success'});
+  };
+
+  
+
+
+
 
   useEffect(() => {
     const fetchProducts = async() => {
@@ -33,6 +49,10 @@ function App() {
     <div className="App">
 
      <Header/>
+
+     <Button onClick={showNoti} >
+       SHow noti
+     </Button>
       
       <Switch>
         <Route path="/song" component={SongFeature} exact />

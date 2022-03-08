@@ -8,6 +8,7 @@ import { BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
 import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import { SnackbarProvider } from 'notistack';
 
 
 ReactDOM.render(
@@ -16,7 +17,13 @@ ReactDOM.render(
 
     <Provider store={store}>
       <BrowserRouter>
-        <App /> 
+        <SnackbarProvider anchorOrigin={{vertical: 'top', horizontal: 'right'}} >
+          <App /> 
+        </SnackbarProvider>
+      
+
+      
+        
       </BrowserRouter>
 
     </Provider>
