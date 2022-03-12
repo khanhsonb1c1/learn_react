@@ -19,6 +19,10 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import CodeIcon from "@material-ui/icons/Code";
 import { Link, NavLink } from "react-router-dom";
 import Register from "features/auth/components/register/register";
+import { Close } from "@material-ui/icons";
+import Login from "features/auth/components/login/login";
+import { Box } from "@material-ui/core";
+
 
 //style cho MUI 
 
@@ -39,11 +43,30 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: 'none',
 
   },
+
+
+  closeButton : {
+    position: 'absolute',
+    top: theme.spacing(1),
+    right: theme.spacing(1),
+    color: theme.palette.grey[500],
+    zIndex: 1,
+
+  }
 }));
+
+const MODE = {
+  LOGIN: 'login',
+  REGISTER: 'register',
+}
 
 export default function Header() {
 
   const [open, setOpen] = useState(false);
+
+  const [mode, setMode] = useState(MODE.LOGIN);
+
+
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -82,23 +105,54 @@ export default function Header() {
 
       disableEscapeKeyDown
       
-      
-      open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+      open={open} 
+      onClose={handleClose} 
+      aria-labelledby="form-dialog-title"
+      >
+
+        <IconButton className={classes.closeButton} onClick={handleClose}>
+          <Close/>
+        </IconButton>
         
         <DialogContent>
 
-          <Register/>
+          {mode === MODE.REGISTER && (
+            <>
+              <Register closeDialog = {handleClose}/>
+
+            <Box textAlign="center">
+
+              <Button color="primary" onClick={() => setMode(MODE.LOGIN)}>
+                Already have an account. Login here.
+              </Button>
+
+            </Box>
+           </>
+
+          )}
+
+
+
+          {mode === MODE.LOGIN && (
+            <>
+              <Login closeDialog = {handleClose}/>
+
+            <Box textAlign="center">
+
+              <Button color="primary" onClick={() => setMode(MODE.REGISTER)}>
+                Dont have an account. Register here.
+              </Button>
+
+            </Box>
+           </>
+
+          )}
+
           
           
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          {/* <Button onClick={handleClose} color="primary">
-            Subscribe
-          </Button> */}
-        </DialogActions>
+
+        
       </Dialog>
     </div>
   );

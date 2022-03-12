@@ -7,6 +7,7 @@ import styles from './styles.module.css';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import StorageKeys from 'constants/storage-keys';
 
 const useStyles = makeStyles({
   root: {
@@ -32,7 +33,10 @@ function CounterFeature(props) {
 
     const dispatch = useDispatch();
 
-    const counter = useSelector( state => state.counter);
+    const count = useSelector( state => state.count);
+
+    console.log('localStorage.getItem(StorageKeys.USER)', localStorage.getItem(StorageKeys.USER))
+
 
     const handleIncreaseClick =() => {
 
@@ -56,7 +60,7 @@ function CounterFeature(props) {
 
     return (
         <div className={styles.counter}>
-            counter : {counter}
+            counter : {count}
         
 
             <div>
