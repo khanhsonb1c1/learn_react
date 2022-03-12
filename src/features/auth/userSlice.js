@@ -42,7 +42,19 @@ const userSlice = createSlice({
     settings: {},
   },
 
-  reducers: {},
+  reducers: {
+
+    logout(state ){
+        // clear localstorage
+
+        localStorage.removeItem(StorageKeys.USER);
+        localStorage.removeItem(StorageKeys.TOKEN);
+
+
+        state.current = {};
+
+    },
+  },
 
   extraReducers: {
   
@@ -58,6 +70,7 @@ const userSlice = createSlice({
   },
 });
 
-const { reducer } = userSlice;
+const { actions, reducer } = userSlice;
+export const {logout} = actions;
 
 export default reducer;

@@ -21,7 +21,11 @@ import { Link, NavLink } from "react-router-dom";
 import Register from "features/auth/components/register/register";
 import { Close } from "@material-ui/icons";
 import Login from "features/auth/components/login/login";
-import { Box } from "@material-ui/core";
+import { Box, Menu, MenuItem } from "@material-ui/core";
+import { useDispatch, useSelector } from "react-redux";
+
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import { logout } from "features/auth/userSlice";
 
 
 //style cho MUI 
@@ -62,9 +66,17 @@ const MODE = {
 
 export default function Header() {
 
+  const dispatch = useDispatch();
+
+  const loggedInUser = useSelector(state => state.user.current);
+
+  const isLoggedIn = !! loggedInUser.id;
+
   const [open, setOpen] = useState(false);
 
   const [mode, setMode] = useState(MODE.LOGIN);
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
 
 
@@ -74,6 +86,19 @@ export default function Header() {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleUserClick = (e) => {
+    setAnchorEl(e.currentTarget);
+  };
+
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogoutClick = () => {
+    const action = logout();
+    dispatch(action);
   };
 
   const classes = useStyles();
@@ -95,9 +120,44 @@ export default function Header() {
             <Button color="inherit">Song2</Button>
           </NavLink>
 
-          <Button color="inherit" onClick={handleClickOpen}>Register</Button>
+
+          {! isLoggedIn && (
+            <Button color="inherit" onClick={handleClickOpen}>
+            Login
+            </Button>
+          )}
+
+          {isLoggedIn && (
+            <IconButton color="inherit" onClick={handleUserClick}>
+              <AccountCircleIcon />
+
+            </IconButton>
+          )}
+
+          
         </Toolbar>
       </AppBar>
+
+      <Menu
+        
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleCloseMenu}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        getContentAnchorEl={null}
+      >
+       
+        <MenuItem onClick={handleCloseMenu}>My account</MenuItem>
+        <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
+      </Menu>
 
       <Dialog 
       
