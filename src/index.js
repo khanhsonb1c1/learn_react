@@ -21,18 +21,10 @@ ReactDOM.render(
           <App /> 
         </SnackbarProvider>
       
-
-      
-        
       </BrowserRouter>
 
     </Provider>
 
-    
- 
-
-    
-    
   </React.StrictMode>,
 
   document.getElementById('root')

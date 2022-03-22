@@ -11,6 +11,7 @@ import headerzzz from "components/header/header";
 import Header from "components/header/header";
 import { useSnackbar } from "notistack";
 import { Button } from "@material-ui/core";
+import ProductFeature from "features/product";
 
 
 
@@ -50,13 +51,19 @@ function App() {
 
      <Header/>
 
-     <Button onClick={showNoti} >
+     
+
+     {/* <Button onClick={showNoti} >
        SHow noti
-     </Button>
+     </Button> */}
       
       <Switch>
-        <Route path="/song" component={SongFeature} exact />
+        <Route path="/song" component={SongFeature}  />
+        <Route path="/products" component={ProductFeature} />
         <Route path="/" component={CounterFeature} />
+
+      
+        
 
         <Route component={NotFound} />
       </Switch>
