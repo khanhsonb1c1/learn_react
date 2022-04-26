@@ -21,7 +21,7 @@ function ProductSkeletonList({ length }) {
           <Grid item key={index} xs={12} sm={6} lg = {3}>   {/* hien thi tren nhuwng thiet bi khac */}
         
             <Box padding={1}>
-              <Skeleton variant="rect" width="100%" height={118} />
+              <Skeleton variant="rect" width="100%" height={200} />
               <Skeleton />
               <Skeleton width="60%" />
             </Box>
