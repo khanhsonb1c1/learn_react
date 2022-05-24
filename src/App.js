@@ -22,48 +22,16 @@ import ProductFeature from "features/product";
 function App() {
 
 
-  const{enqueueSnackbar} = useSnackbar();
-
-
-  const showNoti = () =>{
-    
-    enqueueSnackbar('Register success', {variant:'success'});
-  };
-
-  
-
-
-
-
-  useEffect(() => {
-    const fetchProducts = async() => {
-      const productList = await productApi.getAll();
-      console.log(productList);
-    }
-
-    fetchProducts();
-  }, []);
-
-
-
   return (
     <div className="App">
 
      <Header/>
 
-     
-
-     {/* <Button onClick={showNoti} >
-       SHow noti
-     </Button> */}
-      
       <Switch>
         <Route path="/song" component={SongFeature}  />
         <Route path="/products" component={ProductFeature} />
         <Route path="/" component={CounterFeature} />
 
-      
-        
 
         <Route component={NotFound} />
       </Switch>

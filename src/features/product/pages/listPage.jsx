@@ -4,6 +4,7 @@ import { Box, Container, Grid, makeStyles, Paper, Typography } from "@material-u
 import productApi from "api/productAPI";
 import ProductSkeletonList from "../components/productSkeletonList";
 import ProductList from "../components/productList";
+import { Pagination } from "@material-ui/lab";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -21,13 +22,24 @@ const useStyles = makeStyles((theme) => ({
 function ListPage(props) {
   const classes = useStyles();
   const [productList, setProductList] = useState([]);
+  const [pagination, setPagination] = useState({
+    limit : 12,
+    total : 10,
+    page : 1,
+  });
   const [loading, setLoading] = useState(true);
+  const [fillters, setFillters] = useState({
+    _page: 1, 
+    _limit: 12,
+
+  });
 
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await productApi.getAll({ _page: 1, _limit: 10 });
+        const { data, pagination } = await productApi.getAll(fillters);
         setProductList(data);
+        setPagination(pagination) // cập nhật luôn panigation
         // get API, sau đó có dữ liệu thì vất vào product List, ở dưới sẽ gọi và đưa dữ liệu render ra menu danh 
         // sách sản phẩm
       } catch (error) {
@@ -36,7 +48,15 @@ function ListPage(props) {
 
        setLoading(false);
     })();
-  }, []);
+  }, [fillters]); // mỗi lần fillers thay đổi sẽ lấy lại danh sách sản phẩm
+
+
+  const handleOnChange = (e , page) => {
+    setFillters((prevFilters) => ({
+      ...prevFilters,
+      _page: page,
+    }));
+  };
 
   return (
     <Box>
@@ -47,11 +67,24 @@ function ListPage(props) {
           </Grid>
 
           <Grid item className={classes.right}>
+
             <Paper elevation={0}>
-               { loading ? <ProductSkeletonList/>
+               { loading ? <ProductSkeletonList length={12}/>
                : <ProductList data={productList}/>}
+
+            <Pagination 
+              onChange = {handleOnChange}
+              count={Math.ceil(pagination.total / pagination.limit)}
+              page = {pagination.page}
+              color="primary">
               
-            </Paper>
+            </Pagination>
+            </Paper>  
+            
+            
+              
+            
+
           </Grid>
         </Grid>
       </Container>
