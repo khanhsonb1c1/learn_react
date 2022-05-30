@@ -15,7 +15,7 @@
     "classnames": "^2.3.1",
     "material-ui-snackbar-provider": "^1.5.0",
     "node-sass": "^4.14.1",
-    "nodemon": "^2.0.15",
+    "nodemon": "^2.0.16",
     "notistack": "^1.0.10",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

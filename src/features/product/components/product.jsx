@@ -22,7 +22,7 @@ function Product({product}) {
         
           <Box padding={1}>
 
-              <Box padding={1}>
+              <Box padding={1} minHeight="215px">
                   <img 
               src={thumbnailUrl} // nếu có thumbnail thì dùng, k thì xài cái placeholder.
               alt={product.name}
