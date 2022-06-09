@@ -1,46 +1,40 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Box, Button, makeStyles, TextField, Typography } from "@material-ui/core";
-
+import {
+  Box,
+  Button,
+  makeStyles,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        padding: theme.spacing(3),
-        borderTop: `1px solid ${theme.palette.grey[300]}`,
+  root: {
+    padding: theme.spacing(3),
+    borderTop: `1px solid ${theme.palette.grey[300]}`,
+  },
+
+  range: {
+    display: "flex",
+    flexFlow: "row nowrap",
+    alignItems: "center",
+
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+
+    "& > span": {
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
     },
-
-
-    range: {
-
-        display: 'flex',
-        flexFlow: 'row nowrap',
-        alignItems: 'center',
-
-        marginTop: theme.spacing(1),
-        marginBottom: theme.spacing(1),
-
-        '& > span' : {
-            marginLeft: theme.spacing(1),
-            marginRight: theme.spacing(1),
-        }
-
-    },
-}))
-
-
-
+  },
+}));
 
 FilterByPrice.propTypes = {
   onChange: PropTypes.func,
 };
 
-function FilterByPrice({onChange}) {
-
-   const classes = useStyles()
-
-
-
-
+function FilterByPrice({ onChange }) {
+  const classes = useStyles();
 
   const [values, setValues] = useState({
     salePrice_gte: 0,
@@ -55,7 +49,7 @@ function FilterByPrice({onChange}) {
     }));
   };
 
-  const handleSubmit = (value) => {
+  const handleSubmit = () => {
     if (onChange) {
       onChange(values);
     }
@@ -79,7 +73,12 @@ function FilterByPrice({onChange}) {
         />
       </Box>
 
-      <Button variant="outlined" color="primary" size="small" onClick={handleSubmit}>
+      <Button
+        variant="outlined"
+        color="primary"
+        size="small"
+        onClick={handleSubmit}
+      >
         ÁP DỤNG
       </Button>
     </Box>
