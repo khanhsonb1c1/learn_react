@@ -5,6 +5,7 @@ const categotyApi ={
 
     getAll (params) {
 
+
         const url ='/categories';
         return axiosClient.get(url, {params});
 

@@ -29,29 +29,13 @@ const useStyles = makeStyles((theme) => ({
 
 FilterByCategory.propTypes = {
   onChange: PropTypes.func,
+  categoryList: PropTypes.array
 };
 
-function FilterByCategory({ onChange }) {
-  const [categoryList, setCategoryList] = useState([]);
+function FilterByCategory({ onChange, categoryList }) {
   const classes = useStyles();
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const list = await categotyApi.getAll();
-
-        setCategoryList(
-          list.map((x) => ({
-            // lay id va name trong respon
-            id: x.id,
-            name: x.name,
-          }))
-        );
-      } catch (error) {
-        console.log("failed to fetch categoty list", error);
-      }
-    })();
-  }, []);
+ 
 
   const handleCategoryOnclick = (category) => {
     if (onChange) {

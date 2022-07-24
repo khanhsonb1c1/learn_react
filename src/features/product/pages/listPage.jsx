@@ -1,3 +1,5 @@
+// Trang này hiển thị danh sách sản phẩm
+
 import React, { useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import {
@@ -20,6 +22,7 @@ import { useHistory } from "react-router-dom";
 import queryString from "query-string";
 import { useLocation } from "react-router-dom";
 import { Sort } from "@material-ui/icons";
+import categotyApi from "api/categotyAPI";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -47,6 +50,9 @@ function ListPage(props) {
   const history = useHistory();
 
   const location = useLocation();
+
+  const [categoryList, setCategoryList] = useState([]);
+
 
   const queryParams = useMemo(() => {
     const params = queryString.parse(location.search);
@@ -88,6 +94,24 @@ function ListPage(props) {
       setLoading(false);
     })();
   }, [queryParams]); // mỗi lần fillers thay đổi sẽ lấy lại danh sách sản phẩm
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const list = await categotyApi.getAll();
+
+        setCategoryList(
+          list.map((x) => ({
+            // lay id va name trong respon
+            id: x.id,
+            name: x.name,
+          }))
+        );
+      } catch (error) {
+        console.log("failed to fetch categoty list", error);
+      }
+    })();
+  }, []);
 
   const handleOnChange = (e, page) => {
     const filters = {
@@ -133,6 +157,7 @@ function ListPage(props) {
               <ProductFilter
                 filters={queryParams}
                 onChange={handleFiltersChange}
+                categoryList={categoryList}
               />
             </Paper>
           </Grid>
@@ -144,7 +169,7 @@ function ListPage(props) {
                 onChange={handleSortChange}
               />
 
-              <FilterViewer filters={queryParams} onChange={setNewFilters} />
+              <FilterViewer categoryList={categoryList} filters={queryParams} onChange={setNewFilters} />
 
               {loading ? (
                 <ProductSkeletonList length={12} />

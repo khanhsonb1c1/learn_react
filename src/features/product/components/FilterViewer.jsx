@@ -21,6 +21,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+FilterViewer.propTypes = {
+  filters: PropTypes.object,
+  onChange: PropTypes.func,
+  categoryList: PropTypes.array
+};
+
+function FilterViewer({ filters = {}, onChange = null , categoryList}) {
+  const classes = useStyles();
+
+
+  
 const FILTER_LIST = [
   {
     id: 1,
@@ -57,13 +69,13 @@ const FILTER_LIST = [
 
   {
     id: 4,
-    getLabel: (filters) => `Loại`,
+    getLabel: (filters) => `Loai: ${categoryList.find((item ) => item.id === parseInt(filters['category.id']))?.name}`,
     isActive: () => true,
-    isVisible: (filters) => filters.category,
+    isVisible: (filters) => filters['category.id'],
     isRemovable: true,
     onRemove: (filters) => {
         const newFilters = {...filters}
-        delete newFilters.category.id;
+        delete newFilters['category.id'];
         return newFilters;
     },
     onToggle: () => {},
@@ -88,16 +100,8 @@ const FILTER_LIST = [
  
 ];
 
-FilterViewer.propTypes = {
-  filters: PropTypes.object,
-  onChange: PropTypes.func,
-};
-
-function FilterViewer({ filters = {}, onChange = null }) {
-  const classes = useStyles();
-
-
   const visibleFilters = useMemo(() => {
+    console.log('filters', filters)
     return FILTER_LIST.filter((x) => x.isVisible(filters));
   }, [filters])
 
